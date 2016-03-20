@@ -1,0 +1,18 @@
+<h1 class="page-header"><%= @user.name %></h1>
+<p>email: <%= @user.email %></p>
+<% if @track %>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Latest Goal Worked On:</h3>
+                </div>
+                <div class="panel-body btn-group btn-group-justified" role="group", aria-label="...">
+                    <b><%= link_to @track.goal.name, filtered_days_path(@user.id, @track.id, "current") %></b> | <%= link_to "View All Your Goals", user_tracks_path(@user.id) %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+<%= link_to "Edit Account", edit_user_path(@user.id) %></br>
+<%= link_to "Delete Account", user_path(@user.id), method: :delete, data: { confirm: "Are you sure?" } %>

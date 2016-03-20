@@ -1,0 +1,16 @@
+<h1 class="page-header"><%= @user.name %>'s Goals</h1>
+
+<% unless @tracks == nil || @tracks == [] %>
+    <% @tracks.each do |track| %>
+        <div class="list-group">
+            <span class="list-group-item">
+                <h4 class="list-group-item-heading"><%= link_to track.goal.name, filtered_days_path(@user.id, track.id, "current") %></h4>
+                <p class="list-group-item-text">...</p>
+            </a>
+        </div>
+    <% end %>
+<% else %>
+    <h3>You have no goals at this time.</h3>
+<% end %>
+
+

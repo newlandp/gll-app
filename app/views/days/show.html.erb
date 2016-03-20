@@ -1,0 +1,14 @@
+<h1 class="page-header">Day Number <%= @day.number %> for <%= @goal.name %><%= show_name(@day) %></h1>
+
+<div class="jumbotron">
+  <h1 class="center-header">Day <%= @day.number %></h1></br>
+  <p><%= @day.description %></p>
+</div>
+
+<% if current_user_admin? %>
+    <%= link_to "Edit Day #{@day.number}", edit_goal_day_path(@goal.id, @day.id) %></br>
+<% end %>
+
+<%= link_to "<- Back to #{@goal.name} days", goal_days_path(@goal.id) %></br>
+
+<%= link_to "<- Back to #{@goal.name}", goal_path(@goal.id) %>

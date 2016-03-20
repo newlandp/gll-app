@@ -1,0 +1,15 @@
+<h1 class="page-header">Goals</h1>
+
+<% @goals.each do |goal| %>
+    <div class="list-group">
+        <span class="list-group-item">
+            <h4 class="list-group-item-heading"><%= link_to goal.name, goal_path(goal.id) %></h4>
+            <p class="list-group-item-text"><% goal.description %></p>
+        </a>
+    </div>
+<% end %>
+
+<% if current_user_admin? %>
+    <%= link_to "Create new goal", new_goal_path %></br>
+    <%= link_to "Users", users_path %>
+<% end %>

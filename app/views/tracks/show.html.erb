@@ -1,0 +1,18 @@
+<h1 class="page-header"><%= @user.name %>'s <%= @track.goal.name %> Track</h1>
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progress %>%;">
+        <%= @progress %>% Complete
+    </div>
+</div>
+
+<div class="list-group">
+    <span class="list-group-item">
+        <h4 class="list-group-item-heading"><%= link_to @track.goal.name, filtered_days_path(@user.id, @track.id, "current") %></h4>
+        <p class="list-group-item-text">...</p>
+    </a>
+</div>
+
+<% @days.each do |day| %>
+    
+<% end %>

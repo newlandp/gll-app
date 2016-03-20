@@ -1,0 +1,11 @@
+<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+    <ul class="nav nav-sidebar">
+      <li><%= link_to "Goals", goals_path %></li>
+      <li><%= link_to "Tracks", user_tracks_path(current_user.id) %></li>
+      <li><%= link_to "Profile", user_path(current_user.id) %></li>
+      <li><a href="#">Other</a></li>
+      <li><a href="#">Other</a></li>
+      <li><a href="#">Other</a></li>
+      <li><a href="#">Other</a></li>
+    </ul>
+</div><!--/span-->

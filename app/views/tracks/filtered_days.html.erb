@@ -1,0 +1,63 @@
+<h1 class="page-header"><%= @user.name %>'s <%= @track.goal.name %> Track</h1>
+
+<% if @progress < 100 %>
+    <ul class="nav nav-pills">
+        <% case @key %>
+        <% when "current" %>
+            <li role="presentation" class="active"><%= link_to "Current Day", filtered_days_path(@user.id, @track.id, "current") %></li>
+            <li role="presentation"><%= link_to "Upcoming Days", filtered_days_path(@user.id, @track.id, "upcoming") %></li>
+            <li role="presentation"><%= link_to "Completed Days", filtered_days_path(@user.id, @track.id, "completed") %></li>
+        <% when "upcoming" %>
+            <li role="presentation"><%= link_to "Current Day", filtered_days_path(@user.id, @track.id, "current") %></li>
+            <li role="presentation" class="active"><%= link_to "Upcoming Days", filtered_days_path(@user.id, @track.id, "upcoming") %></li>
+            <li role="presentation"><%= link_to "Completed Days", filtered_days_path(@user.id, @track.id, "completed") %></li>
+        <% when "completed" %>
+            <li role="presentation"><%= link_to "Current Day", filtered_days_path(@user.id, @track.id, "current") %></li>
+            <li role="presentation"><%= link_to "Upcoming Days", filtered_days_path(@user.id, @track.id, "upcoming") %></li>
+            <li role="presentation" class="active"><%= link_to "Completed Days", filtered_days_path(@user.id, @track.id, "completed") %></li>
+        <% end %>
+    </ul></br>
+<% end %>
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progress %>%;">
+        <%= @progress %>% Complete
+    </div>
+</div>
+
+<% if @progress < 100 %>
+    <% unless @day %>
+        <div class="list-group">
+            <% @days.each do |day| %>
+                <span class="list-group-item">
+                    <h4 class="list-group-item-heading">
+                        <% if day.name && day.name != "" %>
+                            <%= link_to "Day #{day.number} - #{day.name}", goal_day_path(@goal.id, day.id) %>
+                        <% else %>
+                            <%= link_to "Day #{day.number}", goal_day_path(@goal.id, day.id) %>
+                        <% end %> 
+                        <% if day.number == @track.current_day %>
+                            <%= link_to "Click here to move to next task", day_change_path(@track.id, "add"), method: :put %>
+                        <% elsif day.number < @track.current_day %>
+                        (Completed)
+                        <% end %>
+                    </h4>
+                    <p class="list-group-item-text"><%= day.description %></p>
+                </span>
+            <% end %>
+        </div>
+    <% else %>
+        <div class="jumbotron">
+          <h1 class="center-header">Day <%= @day.number %></h1></br>
+          <p><%= @day.description %></p></br>
+          <p><%= link_to "Click to complete task", day_change_path(@track.id, "add"), method: :put, :class => "btn btn-primary", role: "button", style: "float:right" %></p>
+        </div>
+    <% end %>
+<% end %>
+
+<% if @progress == 100 %>
+    <h1>Congratulations! You completed <%= @goal.name %></h1>
+<% end %>
+
+<%= link_to "Delete #{@track.goal.name}", user_track_path(@user.id, @track.id), method: :delete, data: { confirm: "Are you sure?" } %></br>
+

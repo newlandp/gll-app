@@ -1,0 +1,18 @@
+<h1 class="page-header">Days for <%= @goal.name %></h1>
+
+<% @days.each do |day| %>
+    <div class="list-group">
+        <span class="list-group-item">
+            <% if day.name && day.name != "" %>
+                <h4 class="list-group-item-heading"><%= link_to "Day #{day.number} - #{day.name}", goal_day_path(@goal.id, day.id) %></h4>
+            <% else %>
+                <h4 class="list-group-item-heading"><%= link_to "Day #{day.number}", goal_day_path(@goal.id, day.id) %></h4>
+            <% end %>
+            <p class="list-group-item-text"><%= day.description unless day.description == nil || day.description == "" %></p>
+        </a>
+    </div>
+<% end %>
+
+<% if current_user_admin? %>
+    <p><%= link_to "Create a New Day", new_goal_day_path(@goal.id) %></p>
+<% end %>

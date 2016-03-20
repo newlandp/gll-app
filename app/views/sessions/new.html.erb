@@ -1,0 +1,38 @@
+<h1 class="page-header center-header">Sign In</h1>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <section id="forms">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-horizontal well">
+                    <%= form_tag(session_path) do %>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    <%= label_tag :email, "Email:", { :class => "control-label" } %></br>
+                                    <%= email_field_tag :email, nil, { :class => "form-control" } %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    <%= label_tag :password, "Password:", { :class => "control-label" } %></br>
+                                    <%= password_field_tag :password, nil, { :class => "form-control" } %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                  <%= submit_tag "Sign In", { :class => "btn btn-primary" } %>
+                                </p>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
